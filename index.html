@@ -113,9 +113,10 @@
         .hero-content {
             position: relative;
             z-index: 10;
-            max-width: 1280px;
+            max-width: 100%;
             margin: 0 auto;
             width: 100%;
+            padding: 0 2rem;
         }
         
         .hero-logo {
@@ -160,24 +161,27 @@
         
         .hero-buttons {
             display: flex;
-            gap: 1rem;
+            gap: 2rem;
             justify-content: center;
             flex-wrap: wrap;
+            margin-top: 2rem;
         }
         
         .btn {
             background: #fff;
             color: #000;
             border: 2px solid #fff;
-            padding: 0.75rem 1.5rem;
+            padding: 1rem 2.5rem;
             border-radius: 0.5rem;
             font-weight: 700;
-            font-size: 0.875rem;
+            font-size: 1rem;
             cursor: pointer;
             transition: all 0.2s;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
+            min-width: 200px;
+            justify-content: center;
         }
         
         .btn:hover {
@@ -544,6 +548,7 @@
         <p>© 2026 Bouképhalos MC. Todos los derechos reservados.</p>
     </footer>
 
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDummyKeyForDemo"></script>
     <script>
         const bars = [
             { name: "Bouképhalos", city: "Pella", region: "Macedonia", image: "bar_pella_main.png", lat: 40.7461, lng: 22.4084 },
@@ -576,9 +581,35 @@
         }
 
         function initMap() {
+            // Usar SVG simple como fallback si Google Maps no está disponible
+            const mapContainer = document.getElementById('map');
             if (typeof google === 'undefined' || !google.maps) {
-                console.log('Google Maps API no disponible');
-                document.getElementById('map').innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#999;font-size:14px;">Mapa no disponible (requiere API key válida)</div>';
+                // Mostrar un SVG simple del mapa de Grecia
+                mapContainer.innerHTML = `
+                    <svg viewBox="0 0 800 600" style="width:100%;height:100%;background:#1a1a1a;">
+                        <text x="400" y="300" text-anchor="middle" fill="#999" font-size="18">Ubicaciones de Bouképhalos MC en Grecia</text>
+                        <circle cx="350" cy="200" r="8" fill="#fff"/>
+                        <text x="360" y="205" fill="#ccc" font-size="12">Pella</text>
+                        <circle cx="420" cy="280" r="8" fill="#fff"/>
+                        <text x="430" y="285" fill="#ccc" font-size="12">Atenas</text>
+                        <circle cx="380" cy="240" r="8" fill="#fff"/>
+                        <text x="390" y="245" fill="#ccc" font-size="12">Tebas</text>
+                        <circle cx="410" cy="260" r="8" fill="#fff"/>
+                        <text x="420" y="265" fill="#ccc" font-size="12">Corinto</text>
+                        <circle cx="360" cy="220" r="8" fill="#fff"/>
+                        <text x="370" y="225" fill="#ccc" font-size="12">Delfos</text>
+                        <circle cx="430" cy="290" r="8" fill="#fff"/>
+                        <text x="440" y="295" fill="#ccc" font-size="12">Micenas</text>
+                        <circle cx="300" cy="310" r="8" fill="#fff"/>
+                        <text x="310" y="315" fill="#ccc" font-size="12">Olimpia</text>
+                        <circle cx="500" cy="150" r="8" fill="#fff"/>
+                        <text x="510" y="155" fill="#ccc" font-size="12">Ilión</text>
+                        <circle cx="380" cy="330" r="8" fill="#fff"/>
+                        <text x="390" y="335" fill="#ccc" font-size="12">Esparta</text>
+                        <circle cx="450" cy="380" r="8" fill="#ff6b35"/>
+                        <text x="460" y="385" fill="#ff6b35" font-size="12">Heraklión (Próxima)</text>
+                    </svg>
+                `;
                 return;
             }
 
