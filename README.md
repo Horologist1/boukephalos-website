@@ -13,12 +13,12 @@ Página web oficial del **Bouképhalos Motorcycle Club**, un club de moteros pro
 ## 📍 Ubicaciones
 
 1. **Pella** - Macedonia (Sede principal)
-2. **Atenas** - Ática
-3. **Tebas** - Beocia
-4. **Corinto** - Corintia
-5. **Delfos** - Fócida
-6. **Micenas** - Argólida
-7. **Olimpia** - Élida
+2. **Néa Athína** - Ática
+3. **Archaía Thebai** - Beocia
+4. **Ephyra i Ómorfi** - Corintia
+5. **Delphi** - Fócida
+6. **Mycenae** - Argólida
+7. **Olýmplia** - Élida
 8. **Ilión** - Tróade
 9. **Esparta** - Laconia
 10. **Heraklión** - Creta (Próxima apertura)
