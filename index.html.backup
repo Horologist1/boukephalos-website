@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bouképhalos Motorcycle Club</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue:wght@400&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #000;
+            color: #fff;
+            line-height: 1.6;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 50;
+            padding: 0 2rem;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        nav h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.25rem;
+            letter-spacing: 0.05em;
+            font-weight: 900;
+        }
+        
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        nav a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 700;
+            letter-spacing: 0.025em;
+            transition: color 0.2s;
+        }
+        
+        nav a:hover {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* Hero Section */
+        #hero {
+            margin-top: 80px;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: #000;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 100%;
+        }
+        
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 0;
+        }
+        
+        .hero-bg img {
+            height: 384px;
+            width: auto;
+            opacity: 0.2;
+            filter: blur(8px);
+        }
+        
+        /* Fade gradient overlays */
+        .hero-fade-h {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, #000 0%, rgba(0,0,0,0.5) 50%, #000 100%);
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .hero-fade-v {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, #000 0%, rgba(0,0,0,0.3) 50%, #000 100%);
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 1280px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 0 2rem;
+        }
+        
+        .hero-logo {
+            height: 384px;
+            width: auto;
+            margin: 0 auto 2rem;
+            display: block;
+            filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.5));
+            -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+            mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+        }
+        
+        .hero-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.25rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
+        }
+        
+        .hero-subtitle {
+            font-size: 0.875rem;
+            color: #f97316;
+            letter-spacing: 0.1em;
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+        
+        .hero-desc {
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.95rem;
+        }
+        
+        .hero-tags {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        .btn {
+            background: #fff;
+            color: #000;
+            border: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 0.375rem;
+            font-weight: 700;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+        
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.9);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: #fff;
+            border: 2px solid #fff;
+        }
+        
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .icon {
+            width: 1rem;
+            height: 1rem;
+            margin-right: 0.5rem;
+        }
+        
+        /* News Section */
+        .news-section {
+            padding: 3rem 2rem;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+        
+        .news-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 0.75rem;
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 1280px;
+            backdrop-filter: blur(10px);
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .news-emoji {
+            font-size: 2.5rem;
+            flex-shrink: 0;
+        }
+        
+        .news-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
+        }
+        
+        .news-text {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1rem;
+        }
+        
+        .news-status {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.875rem;
+        }
+        
+        /* About Section */
+        .about-section {
+            padding: 3rem 2rem;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+            border-bottom: 3px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 1rem;
+            width: fit-content;
+        }
+        
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .about-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+        }
+        
+        .about-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .about-card h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+        
+        .about-card p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+        
+        /* Bars Gallery */
+        .bars-section {
+            padding: 3rem 2rem;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+        
+        .bars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .bar-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 0.75rem;
+            overflow: hidden;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+        
+        .bar-card:hover {
+            border-color: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-4px);
+        }
+        
+        .bar-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+            background: #333;
+        }
+        
+        .bar-info {
+            padding: 1.5rem;
+        }
+        
+        .bar-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.05em;
+        }
+        
+        .bar-location {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+        
+        .bar-desc {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+        
+        /* Map Section */
+        .map-section {
+            padding: 3rem 2rem;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+        
+        .map-container {
+            width: 100%;
+            height: 500px;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            margin-top: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            background: #333;
+        }
+        
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            padding: 3rem 2rem;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+        
+        .contact-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 2rem;
+            border-radius: 0.75rem;
+            text-align: center;
+            margin-top: 2rem;
+            backdrop-filter: blur(10px);
+        }
+        
+        .contact-text {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-button {
+            background: #fff;
+            color: #000;
+            padding: 1rem 2rem;
+            font-weight: 700;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .contact-button:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
+        }
+        
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.5);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.875rem;
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            
+            .hero-title {
+                font-size: 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .bars-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .map-container {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <h1>BOUKÉPHALOS MC</h1>
+        <ul>
+            <li><a href="#hero">INICIO</a></li>
+            <li><a href="#bares">BARES</a></li>
+            <li><a href="#mapa">UBICACIONES</a></li>
+            <li><a href="#contacto">CONTACTO</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="hero-bg">
+            <img id="logo-bg" alt="Bouképhalos">
+        </div>
+        <div class="hero-fade-h"></div>
+        <div class="hero-fade-v"></div>
+        
+        <div class="hero-content">
+            <img id="logo-hero" alt="Bouképhalos Motorcycle Club - Ride with the Legend" class="hero-logo">
+            <p class="hero-desc">Bouképhalos Motorcycle Club: Donde los moteros se reúnen, donde los veteranos encuentran hogar, donde la comunidad prospera. Desde Pella hasta los confines del Egeo.</p>
+            <p class="hero-tags">Bares • Alojamiento nómada • Comunidad progresista</p>
+            <div class="hero-buttons">
+                <button class="btn" onclick="document.getElementById('bares').scrollIntoView({behavior:'smooth'})">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><path d="M9 9c0 0 6-6 9-3m-9 6c0 0 6 6 9 3"></path></svg>
+                    EXPLORAR BARES
+                </button>
+                <button class="btn btn-outline" onclick="document.getElementById('mapa').scrollIntoView({behavior:'smooth'})">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    VER MAPA
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Section -->
+    <section class="news-section">
+        <div class="news-card">
+            <div class="news-emoji">📰</div>
+            <div style="flex: 1; text-align: left;">
+                <h3 class="news-title">¡PRÓXIMA APERTURA!</h3>
+                <p class="news-text">Estamos emocionados de anunciar la próxima apertura de <strong>Heraklion Crete</strong> en la isla de Creta. Un nuevo punto de encuentro para moteros que exploran las aguas del Egeo.</p>
+                <p class="news-status">Próximamente disponible</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <h2 class="section-title">SOBRE NOSOTROS</h2>
+        <p style="color: rgba(255, 255, 255, 0.8); margin-bottom: 2rem;">Bouképhalos es más que un club de moteros. Somos una hermandad dedicada a cuidar de nuestros veteranos, apoyar a quienes lo necesitan, y construir comunidades progresistas en cada polis griega.</p>
+        <div class="about-grid">
+            <div class="about-card">
+                <h3>COMUNIDAD</h3>
+                <p>Soporte mutuo entre moteros, veteranos y viajeros</p>
+            </div>
+            <div class="about-card">
+                <h3>LIBERTAD</h3>
+                <p>La carretera nos llama, y nosotros respondemos</p>
+            </div>
+            <div class="about-card">
+                <h3>EXPANSIÓN</h3>
+                <p>Presencia en 10 ubicaciones estratégicas de Grecia</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bars Gallery -->
+    <section class="bars-section" id="bares">
+        <h2 class="section-title">NUESTROS BARES</h2>
+        <p style="color: rgba(255, 255, 255, 0.7); margin-bottom: 2rem;">Diez ubicaciones estratégicas en Grecia, cada una con su propia historia y carácter</p>
+        <div class="bars-grid" id="bars-grid"></div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section" id="mapa">
+        <h2 class="section-title">UBICACIONES EN GRECIA</h2>
+        <p style="color: rgba(255, 255, 255, 0.7); margin-bottom: 2rem;">Nuestra red se extiende por toda Grecia, conectando comunidades</p>
+        <div class="map-container">
+            <div id="map"></div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contacto">
+        <h2 class="section-title">ÚNETE A LA HERMANDAD</h2>
+        <div class="contact-card">
+            <p class="contact-text">¿Eres motero? ¿Veterano? ¿Alguien que necesita apoyo? Bouképhalos te recibe con los brazos abiertos.</p>
+            <ul style="list-style: none; color: rgba(255, 255, 255, 0.7); margin: 1.5rem 0; font-size: 0.9rem;">
+                <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    Visita cualquiera de nuestras 10 ubicaciones
+                </li>
+                <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><path d="M9 9c0 0 6-6 9-3m-9 6c0 0 6 6 9 3"></path></svg>
+                    Únete a nuestras rutas comunitarias
+                </li>
+                <li style="display: flex; align-items: center; gap: 0.75rem;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle><path d="M12 5v14M5 12h14"></path></svg>
+                    Conecta con la red de Bouképhalos
+                </li>
+            </ul>
+            <p class="contact-text" style="margin-top: 1.5rem; font-size: 0.9rem;">Para más información, visita nuestras redes sociales o acércate a cualquiera de nuestros bares</p>
+            <a href="https://www.xcion.es/alksj" class="contact-button" target="_blank">SEGUIR EN XCION</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>BOUKÉPHALOS MOTORCYCLE CLUB</p>
+        <p>Ride with the Legend • Desde Pella hasta el Egeo</p>
+        <p>© 2026 Bouképhalos MC. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDummyKeyForDemo"></script>
+    <script>
+        const bars = [
+            { name: "Bouképhalos", city: "Pella", region: "Macedonia", image: "bar_pella_main.png", lat: 40.7461, lng: 22.4084 },
+            { name: "Bouképhalos Athens", city: "Atenas", region: "Ática", image: "athens_bar.png", lat: 37.9838, lng: 23.7275 },
+            { name: "Tebas Riders", city: "Tebas", region: "Beocia", image: "bar_community.png", lat: 38.3203, lng: 23.3185 },
+            { name: "Corinto Outpost", city: "Corinto", region: "Corintia", image: "corinth_bar.png", lat: 37.9386, lng: 23.0642 },
+            { name: "Delfos Sacred", city: "Delfos", region: "Fócida", image: "delphi_bar.png", lat: 38.4829, lng: 22.5004 },
+            { name: "Micenas Legacy", city: "Micenas", region: "Argólida", image: "mycenae_bar.png", lat: 37.7310, lng: 23.7343 },
+            { name: "Olimpia Games", city: "Olimpia", region: "Élida", image: "bar_rooms.png", lat: 37.6382, lng: 21.6304 },
+            { name: "Ilión Outpost", city: "Ilión", region: "Tróade", image: "ilion_bar_v2.png", lat: 39.9626, lng: 26.2397 },
+            { name: "Esparta Legacy", city: "Esparta", region: "Laconia", image: "bar_thessaloniki.png", lat: 37.0730, lng: 23.4270 },
+            { name: "Heraklion Crete", city: "Heraclión", region: "Creta", image: "heraklion_bar.png", lat: 35.3387, lng: 25.1442 }
+        ];
+
+        function renderBars() {
+            const grid = document.getElementById('bars-grid');
+            bars.forEach(bar => {
+                const card = document.createElement('div');
+                card.className = 'bar-card';
+                card.innerHTML = `
+                    <img src="images/${bar.image}" alt="${bar.name}" class="bar-image" onerror="this.style.background='#555'">
+                    <div class="bar-info">
+                        <h3 class="bar-name">${bar.name}</h3>
+                        <p class="bar-location">${bar.city}, ${bar.region}</p>
+                        <p class="bar-desc">Ubicación estratégica en la red de Bouképhalos</p>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function initMap() {
+            const mapContainer = document.getElementById('map');
+            if (typeof google === 'undefined' || !google.maps) {
+                showSVGMap();
+                return;
+            }
+            try {
+                const mapCenter = { lat: 38.5, lng: 23.5 };
+                const map = new google.maps.Map(mapContainer, {
+                    zoom: 7,
+                    center: mapCenter,
+                    styles: [
+                        { elementType: 'geometry', stylers: [{ color: '#242f3e' }] },
+                        { elementType: 'labels.text.stroke', stylers: [{ color: '#242f3e' }] },
+                        { elementType: 'labels.text.fill', stylers: [{ color: '#746855' }] }
+                    ]
+                });
+                bars.forEach((bar) => {
+                    const marker = new google.maps.Marker({
+                        position: { lat: bar.lat, lng: bar.lng },
+                        map: map,
+                        title: bar.name
+                    });
+                    const infoWindow = new google.maps.InfoWindow({
+                        content: '<div style="color:#000;font-weight:bold;"><strong>' + bar.name + '</strong><br>' + bar.city + ', ' + bar.region + '</div>'
+                    });
+                    marker.addListener('click', function() {
+                        infoWindow.open(map, marker);
+                    });
+                });
+            } catch (error) {
+                console.log('Google Maps error:', error);
+                showSVGMap();
+            }
+        }
+        
+        function showSVGMap() {
+            document.getElementById('map').innerHTML = '<svg viewBox="0 0 800 600" style="width:100%;height:100%;background:#1a1a1a;"><text x="400" y="30" text-anchor="middle" fill="#999" font-size="18">Ubicaciones de Bouképhalos MC en Grecia</text><circle cx="350" cy="200" r="8" fill="#fff"/><text x="360" y="205" fill="#ccc" font-size="12">Pella</text><circle cx="420" cy="280" r="8" fill="#fff"/><text x="430" y="285" fill="#ccc" font-size="12">Atenas</text><circle cx="380" cy="240" r="8" fill="#fff"/><text x="390" y="245" fill="#ccc" font-size="12">Tebas</text><circle cx="410" cy="260" r="8" fill="#fff"/><text x="420" y="265" fill="#ccc" font-size="12">Corinto</text><circle cx="360" cy="220" r="8" fill="#fff"/><text x="370" y="225" fill="#ccc" font-size="12">Delfos</text><circle cx="430" cy="290" r="8" fill="#fff"/><text x="440" y="295" fill="#ccc" font-size="12">Micenas</text><circle cx="300" cy="310" r="8" fill="#fff"/><text x="310" y="315" fill="#ccc" font-size="12">Olimpia</text><circle cx="500" cy="150" r="8" fill="#fff"/><text x="510" y="155" fill="#ccc" font-size="12">Ilion</text><circle cx="380" cy="330" r="8" fill="#fff"/><text x="390" y="335" fill="#ccc" font-size="12">Esparta</text><circle cx="450" cy="380" r="8" fill="#ff6b35"/><text x="460" y="385" fill="#ff6b35" font-size="12">Heraklion (Proxima)</text></svg>';
+        }
+            const mapCenter = { lat: 38.5, lng: 23.5 };
+            const map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 7,
+                center: mapCenter,
+                styles: [
+                    { elementType: 'geometry', stylers: [{ color: '#242f3e' }] },
+                    { elementType: 'labels.text.stroke', stylers: [{ color: '#242f3e' }] },
+                    { elementType: 'labels.text.fill', stylers: [{ color: '#746855' }] }
+                ]
+            });
+
+            bars.forEach((bar) => {
+                const marker = new google.maps.Marker({
+                    position: { lat: bar.lat, lng: bar.lng },
+                    map: map,
+                    title: bar.name,
+                    icon: 'http://maps.google.com/mapfiles/ms/icons/white-dot.png'
+                });
+
+                const infoWindow = new google.maps.InfoWindow({
+                    content: `<div style="color:#000;font-weight:bold;"><strong>${bar.name}</strong><br>${bar.city}, ${bar.region}</div>`
+                });
+
+                marker.addListener('click', () => {
+                    infoWindow.open(map, marker);
+                });
+            });
+        }
+
+        function loadLogo() {
+            const logoHero = document.getElementById('logo-hero');
+            const logoBg = document.getElementById('logo-bg');
+            logoHero.src = 'images/logo_hero.webp';
+            logoBg.src = 'images/logo_hero.webp';
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderBars();
+            loadLogo();
+            initMap();
+        });
+    </script>
+</body>
+</html>
