@@ -181,16 +181,42 @@
             margin: 0 auto;
         }
         
+        .news-viewport {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 1rem 0;
+            max-height: 400px;
+            scroll-snap-type: y mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .news-viewport::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .news-viewport::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+        }
+        
+        .news-viewport::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 3px;
+        }
+        
         .news-card {
+            flex-shrink: 0;
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 0.75rem;
-            padding: 2rem;
-            margin: 2rem auto;
-            max-width: 1280px;
+            padding: 1.5rem;
             backdrop-filter: blur(10px);
             display: flex;
-            gap: 1.5rem;
+            gap: 1rem;
+            scroll-snap-align: start;
         }
         
         .about-section {
@@ -436,14 +462,8 @@
     </section>
 
     <section class="news-section">
-        <div class="news-card">
-            <div style="font-size: 2.5rem; flex-shrink: 0;">📰</div>
-            <div style="text-align: left;">
-                <h3 style="font-size: 1.3rem; margin-bottom: 0.75rem;">¡PRÓXIMA APERTURA!</h3>
-                <p style="color: rgba(255, 255, 255, 0.8); margin-bottom: 0.5rem;">Estamos emocionados de anunciar la próxima apertura de <strong>Heraklion Crete</strong> en la isla de Creta. Un nuevo punto de encuentro para moteros que exploran las aguas del Egeo.</p>
-                <p style="color: rgba(255, 255, 255, 0.6); font-size: 0.9rem;">Próximamente disponible</p>
-            </div>
-        </div>
+        <h2 class="section-title">NOTICIAS</h2>
+        <div class="news-viewport" id="news-viewport"></div>
     </section>
 
     <section class="about-section">
@@ -529,6 +549,31 @@
             { name: "Heraklion Crete", city: "Heraclión", region: "Creta", image: "images/heraklion_bar.png", lat: 35.3387, lng: 25.1442, comingSoon: true }
         ];
 
+        const newsItems = [
+            // Añade nuevas noticias aquí arriba; aparecerán por encima de "Próxima apertura"
+            { icon: "📺", title: "Anuncio para TV", body: '<a href="images/admoto.mp4" target="_blank" style="color: #ff6b35; text-decoration: underline; font-weight: 600;">Haz clic aquí</a> para ver nuestro spot televisivo.', footer: "" },
+            { icon: "📰", title: "¡PRÓXIMA APERTURA!", body: "Estamos emocionados de anunciar la próxima apertura de <strong>Heraklion Crete</strong> en la isla de Creta. Un nuevo punto de encuentro para moteros que exploran las aguas del Egeo.", footer: "Próximamente disponible" }
+        ];
+
+        function renderNews() {
+            const viewport = document.getElementById('news-viewport');
+            if (!viewport) return;
+            viewport.innerHTML = '';
+            newsItems.forEach((item) => {
+                const card = document.createElement('div');
+                card.className = 'news-card';
+                card.innerHTML = `
+                    <div style="font-size: 2rem; flex-shrink: 0;">${item.icon}</div>
+                    <div style="text-align: left; flex: 1;">
+                        <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem;">${item.title}</h3>
+                        <p style="color: rgba(255, 255, 255, 0.8); margin-bottom: 0.5rem; font-size: 0.9rem;">${item.body}</p>
+                        ${item.footer ? `<p style="color: rgba(255, 255, 255, 0.6); font-size: 0.8rem;">${item.footer}</p>` : ''}
+                    </div>
+                `;
+                viewport.appendChild(card);
+            });
+        }
+
         function renderBars() {
             const grid = document.getElementById('bars-grid');
             bars.forEach((bar) => {
@@ -602,6 +647,7 @@
         }
 
         // Ejecutar funciones inmediatamente
+        renderNews();
         renderBars();
         loadLogo();
         initMap();
